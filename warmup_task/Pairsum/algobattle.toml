@@ -1,0 +1,14 @@
+[match]
+problem = "Pairsum"
+
+[match.generator]
+space = "2GB"
+cpus = 1
+
+[match.solver]
+space = "2GB"
+cpus = 1
+
+[teams.Macaws]
+generator = "generator"
+solver = "solver"

@@ -1,3 +1,5 @@
 *.algo
 *.prob
 results/
+.DS_Store
+

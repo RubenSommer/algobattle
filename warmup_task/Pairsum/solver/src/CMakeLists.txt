@@ -1,11 +1,19 @@
-cmake_minimum_required(VERSION 3.1...3.27)
+cmake_minimum_required(VERSION 3.10)
 
-project(
-  ModernCMakeExample
-  VERSION 1.0
-  LANGUAGES CXX
+project(EqualSumPairs
+    VERSION 1.0
+    LANGUAGES CXX
 )
 
-add_executable(main main.cpp)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-install(TARGETS main DESTINATION "")
+add_executable(main main.cpp io.cpp)
+
+# include direcotry for json.hpp
+target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+install(TARGETS main
+    RUNTIME DESTINATION bin
+)

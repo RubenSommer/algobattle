@@ -1,36 +1,50 @@
 #include "generator.h"
+#include <stdexcept> 
 
+using ull = unsigned long long;
 
 static std::mt19937 generator(static_cast<unsigned int>(std::time(0)));
 
-BrazilianSalesmanInstance BrazilianSalesmanGenerator::generate(double min_weight, double max_weight) {
+BrazilianSalesmanInstance BrazilianSalesmanGenerator::generate(ull min_weight, ull max_weight) {
 
-    std::uniform_int_distribution<int> num_vertices_dist(0, 50);
-    int num_vertices = num_vertices_dist(generator);
+    const int MIN_N = 5;
+    const int MAX_N = 50;
+    std::uniform_int_distribution<int> num_vertices_dist(MIN_N, MAX_N);
+    int num_vertices_int = num_vertices_dist(generator);
+
+    if (num_vertices_int < 2) {
+        throw std::runtime_error("Liczba wierzcholkow mniejsza niz 2.");
+    }
     
     BrazilianSalesmanInstance instance;
-    instance.num_vertices = num_vertices;
+    instance.num_vertices = num_vertices_int;
     instance.start_vertex = 0;
 
-    std::uniform_real_distribution<double> dist(min_weight, max_weight);
+    if (min_weight > max_weight) {
+        std::swap(min_weight, max_weight);
+    }
+    std::uniform_int_distribution<ull> dist(min_weight, max_weight);
 
-    // Generowanie grafu pełnego (K_N): każda para wierzchołków jest połączona
-    for (int u = 0; u < num_vertices; ++u) {
-        for (int v = u + 1; v < num_vertices; ++v) {
-            // Dodaj krawędź
+    for (int u = 0; u < num_vertices_int; ++u) {
+        for (int v = u + 1; v < num_vertices_int; ++v) {
+          
             instance.edges.push_back({u, v});
-            int weight = -1;
-            //to play a bit with solver
-            if(v%21 == 0) weight = 1;
-            else weight = (int)dist(generator);
+            ull weight;
             
+            // to play a bit with solver
+            if(v % 21 == 0) {
+                weight = 1;
+            } else {
+                weight = dist(generator);
+            }
             
             instance.edge_weights.push_back(weight);
         }
     }
 
-    std::uniform_int_distribution<int> start_dist(0, num_vertices - 1);
+    std::uniform_int_distribution<ull> start_dist(0, instance.num_vertices - 1);
     instance.start_vertex = start_dist(generator);
 
     return instance;
 }
+

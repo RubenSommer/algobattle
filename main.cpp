@@ -1,22 +1,20 @@
 #include "generator.h"
 #include <iostream>
 
-/**
- * @brief Główna funkcja do demonstrowania generatora.
- */
+using ull = unsigned long long;
+
 int main() {
     BrazilianSalesmanGenerator generator;
 
     // --- Parametry dla generatora ---
-    int min_W = 0.0;  // Minimalna waga krawędzi
-    double max_W = 5000000000000000; // Maksymalna waga krawędzi
-    // ---------------------------------
-//    
-//    std::cout << "Generowanie instancji Brazilian Salesman z N=" << N
-//              << " wierzcholkami i wagami w zakresie [" << min_W << ", " << max_W << "]." << std::endl;
-//    std::cout << "Instancja jest grafem pelnym K_" << N << "." << std::endl;
-//    std::cout << "====================================================================" << std::endl;
+    // Używamy ull, aby obsłużyć maksymalny zakres.
+    ull min_W = 1;
+    // 2^64 - 1
+    ull max_W = 18446744073709551615ULL;
+    // Dodanie sufiksu ULL, by kompilator wiedział, że to ma być unsigned long long literal
 
+    // Usunięcie zakomentowanego, ale nieprawidłowego wcześniej kodu
+    
     try {
         BrazilianSalesmanInstance instance = generator.generate(min_W, max_W);
 

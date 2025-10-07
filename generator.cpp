@@ -1,18 +1,17 @@
 #include "generator.h"
 
-// Używamy std::mt19937 jako generatora liczb pseudolosowych dla lepszej jakości
+
 static std::mt19937 generator(static_cast<unsigned int>(std::time(0)));
 
-BrazilianSalesmanInstance BrazilianSalesmanGenerator::generate(int num_vertices, double min_weight, double max_weight) {
-    if (num_vertices < 2) {
-        throw std::invalid_argument("too low number of vertices");
-    }
+BrazilianSalesmanInstance BrazilianSalesmanGenerator::generate(double min_weight, double max_weight) {
+
+    std::uniform_int_distribution<int> num_vertices_dist(0, 50);
+    int num_vertices = num_vertices_dist(generator);
     
     BrazilianSalesmanInstance instance;
     instance.num_vertices = num_vertices;
     instance.start_vertex = 0;
 
-    // Rozkład jednostajny dla wag krawędzi (możemy użyć double)
     std::uniform_real_distribution<double> dist(min_weight, max_weight);
 
     // Generowanie grafu pełnego (K_N): każda para wierzchołków jest połączona
@@ -20,14 +19,16 @@ BrazilianSalesmanInstance BrazilianSalesmanGenerator::generate(int num_vertices,
         for (int v = u + 1; v < num_vertices; ++v) {
             // Dodaj krawędź
             instance.edges.push_back({u, v});
+            int weight = -1;
+            //to play a bit with solver
+            if(v%21 == 0) weight = 1;
+            else weight = (int)dist(generator);
             
-            // Losuj wagę
-            double weight = dist(generator);
+            
             instance.edge_weights.push_back(weight);
         }
     }
 
-    // Opcjonalnie: losowe wybranie wierzchołka startowego
     std::uniform_int_distribution<int> start_dist(0, num_vertices - 1);
     instance.start_vertex = start_dist(generator);
 

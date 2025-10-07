@@ -8,9 +8,8 @@ int main() {
     BrazilianSalesmanGenerator generator;
 
     // --- Parametry dla generatora ---
-    int N = 7;           // Liczba wierzchołków
-    double min_W = 0.0;  // Minimalna waga krawędzi
-    double max_W = 18446744073709551616.0; // Maksymalna waga krawędzi
+    int min_W = 0.0;  // Minimalna waga krawędzi
+    double max_W = 5000000000000000; // Maksymalna waga krawędzi
     // ---------------------------------
 //    
 //    std::cout << "Generowanie instancji Brazilian Salesman z N=" << N
@@ -19,7 +18,7 @@ int main() {
 //    std::cout << "====================================================================" << std::endl;
 
     try {
-        BrazilianSalesmanInstance instance = generator.generate(N, min_W, max_W);
+        BrazilianSalesmanInstance instance = generator.generate(min_W, max_W);
 
         std::cout << instance.to_json() << std::endl;
         

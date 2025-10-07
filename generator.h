@@ -48,5 +48,5 @@ public:
      * @param max_weight Maksymalna waga krawędzi.
      * @return Wygenerowana instancja.
      */
-    BrazilianSalesmanInstance generate(int num_vertices, double min_weight, double max_weight);
+    BrazilianSalesmanInstance generate(double min_weight, double max_weight);
 };

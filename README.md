@@ -1,2 +1,0 @@
-# algobattle
-SPP algobattle

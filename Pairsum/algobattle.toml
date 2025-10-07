@@ -9,6 +9,6 @@ cpus = 1
 space = "2GB"
 cpus = 1
 
-[teams.Kiwis]
+[teams.Jellyfish]
 generator = "generator"
 solver = "solver"

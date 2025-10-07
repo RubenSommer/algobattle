@@ -4,3 +4,37 @@ warmup_task/documentation/main.fls
 warmup_task/documentation/main.fdb_latexmk
 warmup_task/documentation/main.log
 .DS_Store
+
+# ===== Python cache & build =====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+*.ipynb
+
+# ===== System files =====
+.DS_Store
+Thumbs.db
+
+# ===== Algobattle specific =====
+# Wyniki testów i symulacji
+results/
+*.log
+*.out
+
+# ===== Backup / temp =====
+*.tmp
+*.swp
+*.bak
+

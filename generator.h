@@ -33,7 +33,7 @@ struct BrazilianSalesmanInstance {
         ss << "  \"start\": " << start_vertex << ",\n";
         ss << "  \"edge_weights\": [\n";
         for (size_t i = 0; i < edge_weights.size(); ++i) {
-            // Wypisujemy ull
+            
             ss << "    " << edge_weights[i];
             if (i < edge_weights.size() - 1) ss << ",";
             ss << "\n";
